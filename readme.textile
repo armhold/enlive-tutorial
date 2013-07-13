@@ -357,7 +357,7 @@ It should be clear that <code>html/content</code> returns a function which will 
   [:p#message] (html/content (get ctxt :message "Nothing to see here"))
 </pre>
 
-This is a considerable improvement and shows off a couple nice Clojure features. However even this is kinda meh. Why? Because what we really want is not just a way to specify a default. Honestly the default value will probably be in the markup itself! It would be much cooler to leave the content of the node <i>unchanged</i> if we for some reason hand it nil for it's content value. This would allow us to easily implement template inheritance which we'll talk about later (grin).
+This is a considerable improvement and shows off a couple nice Clojure features. However even this is kinda meh. Why? Because what we really want is not just a way to specify a default. Honestly the default value will probably be in the markup itself! It would be much cooler to leave the content of the node <i>unchanged</i> if we for some reason hand it nil for its content value. This would allow us to easily implement template inheritance which we'll talk about later (grin).
 
 While Enlive does not have a great shortcut for expressing this pattern of "change the content of this node only if given a non-nil value", since Clojure is a competent Lisp, it's easy to write macros to remove the boilerplate. I've included a handy macro called <code>maybe-content</code> which allows us to write the following instead:
 
@@ -505,7 +505,7 @@ Now that we have our selector <code>defsnippet</code> will look like the followi
         (set-attr :href href)))
 </pre>
 
-Snippets are like templates with two main differences. First, snippets take a selector. This means that they can match only specific parts of an HTML document. The function produced by a <code>defsnippet</code> returns transformed content, <i>not</i> a list of strings the way <code>deftemplate</code> does. This snippet destructures it's first argument (a hash-map) to extract the value of the keys <code>:text</code> and <code>:href</code>. We're also introduced to <code>do-></code>. This is a convenience, we often want to take the matched element and apply a series of transformations to it. In this case we want to set the content of the node as well as its href attribute.
+Snippets are like templates with two main differences. First, snippets take a selector. This means that they can match only specific parts of an HTML document. The function produced by a <code>defsnippet</code> returns transformed content, <i>not</i> a list of strings the way <code>deftemplate</code> does. This snippet destructures its first argument (a hash-map) to extract the value of the keys <code>:text</code> and <code>:href</code>. We're also introduced to <code>do-></code>. This is a convenience, we often want to take the matched element and apply a series of transformations to it. In this case we want to set the content of the node as well as its href attribute.
 
 Let's try out our snippet to see that it worked:
 
